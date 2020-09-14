@@ -86,7 +86,7 @@ app.listen(port, () =&gt; {
 <p>Stap 9: Start de applicatie:</p>
 <pre><code>&gt; npm start
 </code></pre>
-<p>Stap 10: Test of het werkt: ga met je browser naar <a href="http://localhost:3000/menukaart/1">http://localhost:3000/menukaart/1</a>. Je zou iets als dit moeten zien:</p>
+<p>Stap 10: Test of het werkt: ga met je browser naar <a href="http://localhost:3000/menukaart?id=1">http://localhost:3000/menukaart?id=1</a>. Je zou iets als dit moeten zien:</p>
 <pre><code>[{&quot;naam&quot;:&quot;broodje worst&quot;,&quot;prijs&quot;:245},{&quot;naam&quot;:&quot;broodje kaas&quot;,&quot;prijs&quot;:215}]
 </code></pre>
 <h2 id="android-voorbeeld">Android voorbeeld</h2>
@@ -104,7 +104,7 @@ voorbeeldcode in <code>MainActivity.java</code> die de lokale nodejs API benader
 <p>In Visual Studio Code, download de <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice">Azure App Service Extension</a>. Restart VS Code, links heb je nu in de linkerbalk een Azure icoontje. Klik daarop en log in met je student account.</p>
 <p>In het Azure venstertje, klik op de blauwe pijl omhoog om te deployen. Kies een unieke naam, kies de juiste NodeJS versie (12 LTS?), en wacht tot de servers zijn aangemaakt (dit duurt een tijd). Hij stelt daarna nog wat vragen, die ik niet helemaal begrijp, maar die ik met &quot;ja&quot; heb beantwoord.</p>
 <p>Je krijgt na een tijdje de url van je NodeJS website te zien, dit is <a href="https://naam-die-je-had-gekozen.azurewebsites.net/">https://naam-die-je-had-gekozen.azurewebsites.net/</a>.</p>
-<p>Je kunt het testen door die url in de browser te plakken en <a href="https://naam-die-je-had-gekozen.azurewebsites.net/menukaart/1">https://naam-die-je-had-gekozen.azurewebsites.net/menukaart/1</a> op te roepen.</p>
+<p>Je kunt het testen door die url in de browser te plakken en <a href="https://naam-die-je-had-gekozen.azurewebsites.net/menukaart?id=1">https://naam-die-je-had-gekozen.azurewebsites.net/menukaart?id=1</a> op te roepen.</p>
 <p><strong>LET OP</strong>: als je je eigen applicatie gebruikt, en niet de voorbeeldapplicatie hierboven, dat moet je er voor zorgen dat de applicatie op de juiste poort luistert. <code>app.listen</code> moet luisteren naar de poort die Azure doorgeeft in <code>process.env.PORT</code>.</p>
 <h2 id="android-voorbeeld-gebruiken-met-de-azure-website">Android voorbeeld gebruiken met de Azure website</h2>
 <p>Als de Azure API werkt, dan kun je de Android app aanpassen, zodat hij daarvan gebruik maakt in plaats van je lokale API:</p>

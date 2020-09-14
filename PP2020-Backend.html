@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Backend met NodeJS, Azure hosting en SQL Server DB</title>
+        <style>
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="backend-met-nodejs-azure-hosting-en-sql-server-db">Backend met NodeJS, Azure hosting en SQL Server DB</h1>
+<h2 id="nodejs-applicatie-maken">Nodejs applicatie maken</h2>
+<p>Stap 1: Installeer nodejs<br>
+Stap 2: maak een nieuwe directory op je harde schijf &quot;foodserver&quot; o.i.d.<br>
+Stap 3: open een commandprompt naar deze directory en maak een package.json met dit commando:</p>
+<pre><code>&gt; npm init
+</code></pre>
+<p>Vul daarbij de velden in die npm aan je vraagt.</p>
+<p>Stap 4: installeer de afhankelijkheden met dit commando:</p>
+<pre><code>&gt; npm install express --save
+</code></pre>
+<p>Stap : open het project in Visual Studio Code met dit commando:</p>
+<pre><code>&gt; code .
+</code></pre>
+<p>(of gebruik je favoriete editor)</p>
+<p>Stap 6: maak een nieuw bestand &quot;index.js&quot;
+Stap 7: zet het volgende in index.js</p>
+<pre><code class="language-javascript"><div><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+<span class="hljs-keyword">const</span> app = express();
+
+<span class="hljs-comment">// voorbeeld van een endpoint met JSON</span>
+app.get(<span class="hljs-string">'/menukaart'</span>, (req, res) =&gt; {
+    <span class="hljs-keyword">const</span> id = req.query.id;
+
+    <span class="hljs-comment">// voorbeeldoutput</span>
+    <span class="hljs-keyword">let</span> menukaartRegels = [
+        {
+            <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">name</span>: <span class="hljs-string">"broodje worst"</span>,
+            <span class="hljs-attr">price</span>: <span class="hljs-number">245</span>
+        },
+        {
+            <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>,
+            <span class="hljs-attr">name</span>: <span class="hljs-string">"broodje kaas"</span>,
+            <span class="hljs-attr">price</span>: <span class="hljs-number">215</span>
+        },
+    ];
+
+    <span class="hljs-keyword">if</span> (id) {
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> menukaartRegels uit de database ophalen</span>
+    }
+
+    <span class="hljs-comment">// voorbeeld output sturen</span>
+    res.send(menukaartRegels);
+});
+
+<span class="hljs-comment">// dit is belangrijk voor azure: die geeft de poort door via process.env.PORT (meestal 8080)</span>
+<span class="hljs-keyword">const</span> port = process.env.PORT || <span class="hljs-number">3000</span>;
+
+<span class="hljs-comment">// start de server</span>
+app.listen(port, () =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Foodserver listening at port <span class="hljs-subst">${port}</span>`</span>);
+});
+</div></code></pre>
+<p>Stap 8: Pas package.json aan zodat je de server met <code>npm start</code> kunt starten. Voeg hiervoor een &quot;start&quot; regel toe aan &quot;scripts&quot; (haal de &quot;test&quot; regel eventueel weg):</p>
+<pre><code class="language-json"><div><span class="hljs-string">"scripts"</span>: {
+    <span class="hljs-attr">"start"</span>: <span class="hljs-string">"node index.js"</span>
+},
+</div></code></pre>
+<p>Stap 9: Start de applicatie:</p>
+<pre><code>&gt; npm start
+</code></pre>
+<p>Stap 10: Test of het werkt: ga met je browser naar <a href="http://localhost:3000/menukaart/1">http://localhost:3000/menukaart/1</a>. Je zou iets als dit moeten zien:</p>
+<pre><code>[{&quot;naam&quot;:&quot;broodje worst&quot;,&quot;prijs&quot;:245},{&quot;naam&quot;:&quot;broodje kaas&quot;,&quot;prijs&quot;:215}]
+</code></pre>
+<h2 id="android-voorbeeld">Android voorbeeld</h2>
+<p>In de <a href=".%5C2020%5Cfoodapp.7z">zip-bijlage</a> vind je een Android app die met de lokale nodejs app kan praten. Dit gebeurt via de library Retrofit. Pak de zip file uit en open de app in Android Studio. Je kunt het project in een emulator starten. Het appje doet niets, maar er staat
+voorbeeldcode in <code>MainActivity.java</code> die de lokale nodejs API benadert. Als je het project debugt, en een breakpoint zet in die code, kun je zien of het werkt. De library waarmee je de API benadert is <a href="https://square.github.io/retrofit/">Retrofit</a>.</p>
+<p>Het gebruik van Retrofit komt kort gezegd hier op neer:</p>
+<ul>
+<li>je definieert de data als klassen. Voorbeeld in de app is de klasse <code>Menukaart</code>, met een <code>name</code> en een <code>id</code>.</li>
+<li>je definieert de API endpoints als methods op een interface. Voorbeeld in de app: <code>FoodApi</code>.</li>
+<li>je maakt een factory klasse die de API client aanmaakt met de juiste basis-url. Voorbeeld in de app: <code>FoodApiFactory</code>.</li>
+<li>De client gebruik je door de methods aan te roepen van de interface die je zelf had gedefinieerd. Voorbeeld in de app: <code>testApi</code> in <code>MainActivity</code>.</li>
+</ul>
+<h2 id="uploaden-naar-azure">Uploaden naar Azure</h2>
+<p>Je moet eerst je studentenaccount in Azure activeren door naar <a href="https://azure.microsoft.com/nl-nl/developer/students/">https://azure.microsoft.com/nl-nl/developer/students/</a> ta gaan. Als je inlogt met je Saxion account, krijg je $100 gratis tegoed.</p>
+<p>In Visual Studio Code, download de <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice">Azure App Service Extension</a>. Restart VS Code, links heb je nu in de linkerbalk een Azure icoontje. Klik daarop en log in met je student account.</p>
+<p>In het Azure venstertje, klik op de blauwe pijl omhoog om te deployen. Kies een unieke naam, kies de juiste NodeJS versie (12 LTS?), en wacht tot de servers zijn aangemaakt (dit duurt een tijd). Hij stelt daarna nog wat vragen, die ik niet helemaal begrijp, maar die ik met &quot;ja&quot; heb beantwoord.</p>
+<p>Je krijgt na een tijdje de url van je NodeJS website te zien, dit is <a href="https://naam-die-je-had-gekozen.azurewebsites.net/">https://naam-die-je-had-gekozen.azurewebsites.net/</a>.</p>
+<p>Je kunt het testen door die url in de browser te plakken en <a href="https://naam-die-je-had-gekozen.azurewebsites.net/menukaart/1">https://naam-die-je-had-gekozen.azurewebsites.net/menukaart/1</a> op te roepen.</p>
+<p><strong>LET OP</strong>: als je je eigen applicatie gebruikt, en niet de voorbeeldapplicatie hierboven, dat moet je er voor zorgen dat de applicatie op de juiste poort luistert. <code>app.listen</code> moet luisteren naar de poort die Azure doorgeeft in <code>process.env.PORT</code>.</p>
+<h2 id="android-voorbeeld-gebruiken-met-de-azure-website">Android voorbeeld gebruiken met de Azure website</h2>
+<p>Als de Azure API werkt, dan kun je de Android app aanpassen, zodat hij daarvan gebruik maakt in plaats van je lokale API:</p>
+<ul>
+<li>Open de klasse <code>FoodApiFactory</code></li>
+<li>Vervang <code>http://10.0.2.2:3000</code> door <code>https://naam-die-je-had-gekozen.azurewebsites.net</code></li>
+<li>Heers</li>
+</ul>
+<h2 id="een-sql-server-database-gebruiken-in-de-api">Een SQL Server Database gebruiken in de API</h2>
+<p>De API is nu niet heel erg flexibel: je kunt maar een menukaart opvragen. Je hebt hier natuurlijk een database voor nodig. Het gebruiken van een Sqlite Db hiervoor kan niet: Sqlite is niet berekend op meerdere gebruikers tegelijk - en dat is wel wat er gegarandeerd in een API gebeurt.</p>
+<p>Je kunt hiervoor een SQL Server database gebruiken, ook in Azure.</p>
+<h3 id="db-in-azure-aanmaken">DB in Azure aanmaken</h3>
+<p>Ga naar <a href="https://portal.azure.com">https://portal.azure.com</a>, klik op <em>Create a resource</em>. Klik daarna op <em>SQL Database</em>.</p>
+<ul>
+<li>
+<p>kies bij subscription &quot;Azure for students&quot;</p>
+</li>
+<li>
+<p>Maak bij Resource Group een nieuwe Resource Group aan, bijvoorbeeld &quot;food&quot; of &quot;PP2020&quot; (wat je maar wilt).</p>
+</li>
+<li>
+<p>Kies een logische databasenaam, bijvoorbeeld &quot;foodapp&quot;</p>
+</li>
+<li>
+<p>Maak een nieuwe server aan:</p>
+<ul>
+<li>Server name: kies iets wat uniek is</li>
+<li>Server admin login: kies een loginnaam (en onthoud die!)</li>
+<li>Password: kies een wachtwoord (en onthoud die!)</li>
+<li>Location: kies West-Europa</li>
+<li>Kies OK</li>
+</ul>
+</li>
+<li>
+<p><strong>Belangrijk</strong>, anders is je tegoed zo op: kies nu &quot;Configure database&quot;</p>
+</li>
+<li>
+<p>Kies &quot;Looking for basic, standard, premium?&quot;</p>
+</li>
+<li>
+<p>Kies &quot;Basic&quot;</p>
+</li>
+<li>
+<p>Klik &quot;Apply&quot;</p>
+</li>
+<li>
+<p>Klik &quot;Review+Create&quot;</p>
+</li>
+<li>
+<p>Kies Create</p>
+</li>
+</ul>
+<p>Wacht nu tot je SQL server aangemaakt is.</p>
+<p>Ga daarna weer naar <a href="https://portal.azure.com">https://portal.azure.com</a>,</p>
+<ul>
+<li>klik op je SQL server (niet de database),</li>
+<li>Klik links in de lijst op &quot;Firewall and virtual networks&quot;</li>
+<li>voeg je eigen IP adres toe onder &quot;Connections from the IPs specified below provides access to all the databases ...&quot;. Als het goed is kun je je IP-adres afkijken van wat daar staat onder &quot;Client IP address&quot;. Voeg die dus toe, Rule Name iets willekeurigs, Start IP en End IP gelijk aan je Client IP address.</li>
+<li>Zet &quot;Allow Azure services and resources to access this server&quot; op &quot;Yes&quot;.</li>
+<li>klik op &quot;Save&quot;</li>
+</ul>
+<p>Je kunt de database nu met <a href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15">SQL Server Management Studio</a> beheren met de volgende gegevens:</p>
+<p>Server name: (je zelfgekozen Server name).database.windows.net
+Authentication: SQL Server authentication<br>
+Login: (je zelfgekozen Server admin login)<br>
+Password: (je zelfgekozen Password)</p>
+<h3 id="db-in-nodejs-gebruiken">DB in Nodejs gebruiken</h3>
+<p>Je kunt voor het bevragen van de SQL server de library tedious gebruiken, maar er
+zijn meer libraries, allemaal met hun eigen voors en tegens en eigenaardigheden - doe vooral wat je het makkelijkste lijkt.</p>
+<p>Voeg aan je nodejs app de library toe:</p>
+<pre><code>&gt; npm i tedious --save
+</code></pre>
+<p>Voeg nu aan je <code>index.js</code> het volgende toe ergens bovenin:</p>
+<pre><code class="language-javascript"><div>
+<span class="hljs-keyword">const</span> { Connection, Request, TYPES } = <span class="hljs-built_in">require</span>(<span class="hljs-string">"tedious"</span>);
+
+<span class="hljs-comment">// Create connection to database</span>
+<span class="hljs-keyword">const</span> config = {
+    <span class="hljs-attr">authentication</span>: {
+        <span class="hljs-attr">options</span>: {
+            <span class="hljs-attr">userName</span>: <span class="hljs-string">"(je zelfgekozen Server admin login)"</span>, 
+            <span class="hljs-attr">password</span>: <span class="hljs-string">"(je zelfgekozen Password)"</span> 
+        },
+        <span class="hljs-attr">type</span>: <span class="hljs-string">"default"</span>
+    },
+    <span class="hljs-attr">server</span>: <span class="hljs-string">"(je zelfgekozen Server name).database.windows.net"</span>, 
+    <span class="hljs-attr">options</span>: {
+        <span class="hljs-attr">database</span>: <span class="hljs-string">"(je zelfgekozen databasenaam)"</span>, 
+        <span class="hljs-attr">encrypt</span>: <span class="hljs-literal">true</span>
+    }
+};
+</div></code></pre>
+<p>Je moet dan natuurlijk wel tabellen in de database hebben die je kunt opvragen. In onderstaand voorbeeld is er een tabel &quot;Menukaart&quot; met wat kolommen. (Dit is niet zoals je database er in het echt moet uitzien, maar alleen voor het voorbeeld.)</p>
+<pre><code class="language-SQL"><div><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Menukaart (
+	<span class="hljs-keyword">id</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">IDENTITY</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+	<span class="hljs-keyword">name</span> <span class="hljs-keyword">nvarchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+	price <span class="hljs-built_in">decimal</span>(<span class="hljs-number">18</span>, <span class="hljs-number">0</span>) <span class="hljs-literal">NULL</span>
+)
+</div></code></pre>
+<p>Daarna kun je je API aanpassen, zodat deze de gegevens uit de database haalt.</p>
+<pre><code class="language-javascript"><div>app.get(<span class="hljs-string">'/menukaart'</span>, <span class="hljs-keyword">async</span> (req, res) =&gt; {
+    <span class="hljs-keyword">const</span> id = req.query.id;
+
+    <span class="hljs-comment">// connection maken met de db</span>
+    <span class="hljs-keyword">const</span> connection = <span class="hljs-keyword">new</span> Connection(config);
+    connection.connect();
+
+    connection.on(<span class="hljs-string">"connect"</span>, connectionError =&gt; {
+        <span class="hljs-comment">// stop bij fouten</span>
+        <span class="hljs-keyword">if</span> (connectionError) {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Fout bij maken connection"</span>);
+            <span class="hljs-built_in">console</span>.error(connectionError);
+            <span class="hljs-keyword">return</span>;
+        }
+
+        <span class="hljs-comment">// gegevens opvragen uit de db</span>
+        <span class="hljs-keyword">let</span> resultaat = [];
+        <span class="hljs-keyword">const</span> request = <span class="hljs-keyword">new</span> Request(<span class="hljs-string">"SELECT id,name,price FROM Menukaart where id=@id"</span>, (queryErr) =&gt; {
+            <span class="hljs-comment">// dit wordt aangeroepen als de query afgerond is </span>
+            <span class="hljs-keyword">if</span> (queryErr) {
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Fout bij uitvoeren query"</span>);
+                <span class="hljs-built_in">console</span>.log(queryErr);
+                <span class="hljs-keyword">return</span>;
+            }
+
+            <span class="hljs-comment">// stuur antwoord terug naar de client</span>
+            res.send(resultaat);
+        });
+
+        <span class="hljs-comment">// id parameter toevoegen</span>
+        request.addParameter(<span class="hljs-string">"id"</span>, TYPES.Int, <span class="hljs-built_in">parseInt</span>(id, <span class="hljs-number">10</span>));
+
+        <span class="hljs-comment">// bij elke rij wordt deze event aangeroepen: onderstaande is een generieke</span>
+        <span class="hljs-comment">// manier om een array met resultaten te vullen.</span>
+        request.on(<span class="hljs-string">"row"</span>, columns =&gt; {
+            <span class="hljs-keyword">const</span> newRow = {};
+            columns.forEach(<span class="hljs-function"><span class="hljs-params">column</span> =&gt;</span> {
+                newRow[column.metadata.colName] = column.value;
+            });
+            resultaat.push(newRow);
+        });
+
+        <span class="hljs-comment">// voer bovenstaande allemaal uit</span>
+        connection.execSql(request);
+    });
+});
+</div></code></pre>
+<p>Als je dit lokaal aan de praat hebt, kun je dit ook weer uploaden naar Azure en zou het moeten werken.</p>
+
+    </body>
+    </html>

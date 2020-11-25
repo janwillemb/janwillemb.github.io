@@ -36,17 +36,33 @@ Achter de twee klokken een QR code. Samen leveren ze een boodschap op voor de vo
 
 **Taak voor *OWEN*.**  
 
-De QR code leidt tot een mp3 met de volgende taak.  
-> Inspreken: Ga samen naar nummer 431. TIAS moet daar aanbellen en de volgende aanwijzing vragen aan de mensen die daar wonen.
+![QR](QR%20achter%20klokken.png)  
+
+De QR code leidt tot een mp3 met de volgende taak: "Ga samen naar nummer 431. TIAS moet daar aanbellen en de volgende aanwijzing vragen aan de mensen die daar wonen."
+
+Link mp3: https://janwillemb.github.io/2020/AmongUsSpeurtocht/aanwijzing-klokken.mp3
 
 **Taak voor *TIAS*.**  
 
-Shields dingetje: 
+Kinderen gaan naar Twan, daar aanbellen, om de aanwijzing te vragen. Is een USB stick, dus Laptop daarna nodig.
+
+> Voorbereiden: USB stick naar Twan
+
+USB stick heeft link naar shields dingetje:  
 https://janwillemb.github.io/2020/AmongUsSpeurtocht/shields.html
+
+Een among us spelletje voor Luc.
 
 **Taak voor *LUC*.**  
 
-Doodschieten imposter?
+> Voorbereiden: laptop klaarzetten
+
+Einde van de shields is de victory sheet.  
+https://janwillemb.github.io/2020/AmongUsSpeurtocht/victory.html
+
+Daar wordt Dennis de opdracht gegeven de imposter neer te schieten.
+
+> Voorbereiden: nerf pistolen, beschermingsprullenbak voor A.L., beschermingsdeken voor A.L.
 
 **Taak voor *DENNIS*.**  
 

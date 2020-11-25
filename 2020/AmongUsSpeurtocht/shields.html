@@ -43,68 +43,19 @@
             <path transform="matrix(1.0427 0 0 1.0427 -108.57 45.874)" d="m428.88 167.28h-54.185l-27.092-46.925 27.092-46.925 54.185 2e-6 27.092 46.925z" filter="url(#filter1728)"/>
            </g>
        </svg>
-       <script>
-           let numHidden = 0;
-           let state = {};
-           let waitTimeout = 1500;
-
-           function toggle(id) {
-               const poly = document.getElementById(id);
-                const myState = state[id] || { };
-                state[id] = myState;
-
-                clearTimeout(myState.timeout);
-                if (poly.style.display === 'none') {
-                    poly.style.display = 'block'
-                    numHidden--;
-                } else {
-                    poly.style.display = 'none';
-                    myState.timeout = setTimeout(() => toggle(id), waitTimeout);
-
-                    numHidden++;
-                    if (numHidden === 6) {
-                        won();
-                    }
-
-                }
-           }
-
-           function won() {
-                for (let i = 1; i < 7; i++) {
-                    const id = 'x' + i;
-                    clearTimeout(state[id].timeout);
-                    const poly = document.getElementById(id);
-                    poly.style.display = "block";
-                }
-                const allesOk = document.getElementById("allesOk");
-                const gelukt = document.getElementById("gelukt");
-                allesOk.style.display = "block";
-                gelukt.style.display = "block";
-                setInterval(() => {
-                    if (allesOk.style.display === "none") {
-                        gelukt.style.display = "block";
-                        allesOk.style.display = "block";
-                    } else {
-                        gelukt.style.display = "none";
-                        allesOk.style.display = "none";
-                    }
-                }, 600);
-           }
-
-           function level(newValue) {
-                waitTimeout = newValue;
-           }
-       </script>
-
-    <div style="position: absolute; left: 610; top: 420">
+      
+    <div style="position: absolute; left: 610; top: 380; background-color: black;">
         <input type="radio" name="diff" id="easy" onclick="level(2500)"/><label for="easy">Makkelijk</label><br>
-        <input type="radio" name="diff" id="normal" checked="checked" onclick="level(1500)"/><label for="normal">Gewoon</label><br>
-        <input type="radio" name="diff" id="hard"/><label for="hard" onclick="level(800)">Moeilijk</label>
+        <input type="radio" name="diff" id="normal" checked="checked" onclick="level(1800)"/><label for="normal">Gewoon</label><br>
+        <input type="radio" name="diff" id="hard"/><label for="hard" onclick="level(1000)">Moeilijk</label>
         <div style="text-align: center; border: 2px solid Silver; margin: 4px; cursor: pointer" onclick="location.reload()">
             Herstart
         </div>
+        <div style="text-align: center; border: 2px solid Silver; margin: 4px; cursor: pointer" onclick="proceed()">
+            Ga verder
+        </div>
     </div>
-    <div style="position: absolute; left: 350; top: 560; display: none" id="gelukt">
+    <div style="position: absolute; left: 350; top: 560; display: none; background-color: black;" id="gelukt">
         GELUKT!
     </div>
     <p>Deze taak is voor Luc:
@@ -115,6 +66,71 @@
         <p>* * * EINDE BERICHT * * *</p>
     </div>
     <script src="scripts.js"></script>
+    <script>
+        let numHidden = 0;
+        let state = {};
+        let waitTimeout = 1500;
+        let hasWon = false;
+
+        document.getElementById("normal").checked = true;
+
+        function toggle(id) {
+            const poly = document.getElementById(id);
+             const myState = state[id] || { };
+             state[id] = myState;
+
+             clearTimeout(myState.timeout);
+             if (poly.style.display === 'none') {
+                 poly.style.display = 'block'
+                 numHidden--;
+             } else {
+                 poly.style.display = 'none';
+                 myState.timeout = setTimeout(() => toggle(id), waitTimeout);
+
+                 numHidden++;
+                 if (numHidden === 6) {
+                     won();
+                 }
+
+             }
+        }
+
+        function won() {
+             hasWon = true;
+             for (let i = 1; i < 7; i++) {
+                 const id = 'x' + i;
+                 clearTimeout(state[id].timeout);
+                 const poly = document.getElementById(id);
+                 poly.style.display = "block";
+             }
+             const allesOk = document.getElementById("allesOk");
+             const gelukt = document.getElementById("gelukt");
+             allesOk.style.display = "block";
+             gelukt.style.display = "block";
+             setInterval(() => {
+                 if (allesOk.style.display === "none") {
+                     gelukt.style.display = "block";
+                     allesOk.style.display = "block";
+                 } else {
+                     gelukt.style.display = "none";
+                     allesOk.style.display = "none";
+                 }
+             }, 600);
+        }
+
+        function proceed() {
+            if (!hasWon) {
+                return;
+            }
+            if (confirm("Wil je de volgende stap van de speurtocht gaan doen?")) {
+                location.href = "victory.html";
+            }
+        }
+
+        function level(newValue) {
+             waitTimeout = newValue;
+        }
+    </script>
 </body>
 
 </html>

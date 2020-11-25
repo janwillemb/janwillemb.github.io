@@ -20,18 +20,18 @@
             src: local('AmongUsText'), url('AmongUsText.woff') format('woff');
         }
 
-        h1,
-        h2,
-        h3 {
-            font-family: 'AmongUsTitle';
-            font-size: 80px;
-        }
-
         body, p {
             font-family: 'AmongUsText';
             background-color: black;
             color: white;
             font-size: 32px;
+        }
+        
+        h1,
+        h2,
+        h3 {
+            font-family: 'AmongUsTitle';
+            font-size: 80px;
         }
     </style>
 
@@ -53,7 +53,7 @@
         const tags = instructionText.getElementsByTagName("P");
         for (const p of tags) {
             textsToWrite.push(p.innerHTML);
-            p.innerHTML = "";
+            p.innerHTML = " ";
             ps.push(p);
         }
 

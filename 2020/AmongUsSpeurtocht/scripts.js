@@ -7,7 +7,9 @@ const ps = [];
 
 const tags = instructionText.getElementsByTagName("P");
 for (const p of tags) {
-    textsToWrite.push(p.innerHTML);
+    let txt = p.innerHTML;
+    txt = txt.replace(/\s+/, " ");
+    textsToWrite.push(txt);
     p.innerHTML = " ";
     ps.push(p);
 }
@@ -32,7 +34,7 @@ function addNextChar() {
     let nextTimeOutAt = 50;
 
     if (!currentText) {
-        nextTimeOutAt = 2000; // delay on new <P>
+        nextTimeOutAt = 1500; // delay on new <P>
     } else {
         const peekNext = currentText.substr(0, 1);
         if ((curChar === "." || curChar === "!") && peekNext === " ") {

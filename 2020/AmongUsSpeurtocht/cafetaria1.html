@@ -2,39 +2,10 @@
 
 <head>
     <title>Among Us - Cafetaria</title>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
 </head>
 
 <body>
-    <style>
-        @font-face {
-            font-family: 'AmongUsTitle';
-            font-style: normal;
-            font-weight: normal;
-            src: local('AmongUsTitle'), url('AmongUsTitle.woff') format('woff');
-        }
-
-        @font-face {
-            font-family: 'AmongUsText';
-            font-style: normal;
-            font-weight: normal;
-            src: local('AmongUsText'), url('AmongUsText.woff') format('woff');
-        }
-
-        body, p {
-            font-family: 'AmongUsText';
-            background-color: black;
-            color: white;
-            font-size: 32px;
-        }
-        
-        h1,
-        h2,
-        h3 {
-            font-family: 'AmongUsTitle';
-            font-size: 80px;
-        }
-    </style>
-
     <h1>Among Us - Cafetaria</h1>
     <img src="cafetaria.jpg">
     <div id='instructiontext'>
@@ -42,52 +13,8 @@
         <p>Misschien vinden jullie wel een aanwijzing...</p>
         <p>Onder de ... CARPORT</p>
     </div>
-
-    <script>
-        const instructionText = document.getElementById("instructiontext");
-        let textsToWrite = [];
-        let currentP;
-        let currentText = "";
-        const ps = [];
-
-        const tags = instructionText.getElementsByTagName("P");
-        for (const p of tags) {
-            textsToWrite.push(p.innerHTML);
-            p.innerHTML = " ";
-            ps.push(p);
-        }
-
-        setTimeout(addNextChar, 50);
-
-        function addNextChar() {
-
-            if (!currentText) {
-                currentText = textsToWrite.shift();
-                if (!currentText) {
-                    return;
-                }
-
-                currentP = ps.shift();
-            }
-
-            const curChar = currentText.substr(0, 1);
-            currentText = currentText.substr(1);
-            currentP.innerHTML += curChar;
-
-            let nextTimeOutAt = 50;
-
-            if (!currentText) {
-                nextTimeOutAt = 2000; // delay on new <P>
-            } else {
-                const peekNext = currentText.substr(0, 1);
-                if ((curChar === "." || curChar === "!") && peekNext === " ") {
-                    nextTimeOutAt = 1000; // delay on space
-                }
-            }
-
-            setTimeout(addNextChar, nextTimeOutAt);
-        }
-    </script>
+    
+    <script src="scripts.js"></script>
 </body>
 
 </html>

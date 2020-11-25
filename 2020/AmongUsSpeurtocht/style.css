@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'AmongUsTitle';
+    font-style: normal;
+    font-weight: normal;
+    src: local('AmongUsTitle'), url('AmongUsTitle.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'AmongUsText';
+    font-style: normal;
+    font-weight: normal;
+    src: local('AmongUsText'), url('AmongUsText.woff') format('woff');
+}
+
+body, p {
+    font-family: 'AmongUsText';
+    background-color: black;
+    color: white;
+    font-size: 32px;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'AmongUsTitle';
+    font-size: 80px;
+}

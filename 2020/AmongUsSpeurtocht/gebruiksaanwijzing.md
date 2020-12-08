@@ -1,7 +1,9 @@
+# Speurtocht Among Us
+
 Start met https://janwillemb.github.io/2020/AmongUsSpeurtocht/
 
-Eerste aanwijzing QR code onder de carport:
-![QR](QR%20onder%20carport.png)  
+Eerste aanwijzing QR code onder de carport:   
+![QR](QR%20onder%20carport.png)   
 > Voorbereiden: QR onder carport
 
 Die verwijst naar de instructie voor de eerste taak:  
@@ -32,7 +34,7 @@ https://janwillemb.github.io/2020/AmongUsSpeurtocht/emergency.html
 
 Achter de twee klokken een QR code. Samen leveren ze een boodschap op voor de volgende aanwijzing. Owen moet ze scannen.
 
-> Voorbereiden: QR codes achter de klokken plakken.
+> DONE: QR codes achter de klokken plakken.
 
 **Taak voor *OWEN*.**  
 
@@ -65,5 +67,6 @@ Daar wordt Dennis de opdracht gegeven de imposter neer te schieten.
 > Voorbereiden: nerf pistolen, beschermingsprullenbak voor A.L., beschermingsdeken voor A.L.
 
 **Taak voor *DENNIS*.**  
+
 
 

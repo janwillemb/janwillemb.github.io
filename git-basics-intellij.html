@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Git Basics</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="git-basics">Git Basics</h1>
+<h2 id="initialisatie">Initialisatie</h2>
+<p>Maak een nieuw java project aan in IntelliJ (Nieuw &gt; next &gt; commandline app &gt; next &gt; geef een naam in &gt; Finish). Je kunt ook een bestaand project van jezelf openen.</p>
+<p>Kies in menu VCS &quot;Enable Version Control Integration&quot;.<br>
+<img src="file:///c:\MijnDocumenten\Kasten\2020\git\1.jpg" alt=""></p>
+<p>Kies &quot;git&quot; en OK. Na een tijdje meldt IntelliJ dat het gelukt is, linksonderin:<br>
+<img src="file:///c:\MijnDocumenten\Kasten\2020\git\2.jpg" alt=""></p>
+<p>Doe nu je eerste <em>commit</em>.</p>
+<ol>
+<li>Klik op het tabje &quot;commit&quot; aan de linkerkant</li>
+<li>Selecteer alle &quot;Unversioned files&quot;, dit zijn de nieuwe files van je project die nog niet in de git directory bekend zijn (in dit geval: <em>alle</em> files, want de git repository is nog leeg)</li>
+<li>Vul een mooie commit message in waar je later geen spijt van krijgt</li>
+<li>Druk op &quot;Commit&quot;</li>
+</ol>
+<p><img src="file:///c:\MijnDocumenten\Kasten\2020\git\3.jpg" alt=""></p>
+<p>Git vraagt nu eventueel om je naam en je emailadres. Het maakt niet uit wat je hier invult: dit is de naam en het emailadres waarmee voortaan je commit messages worden &quot;getekend&quot;.</p>
+<p>IntelliJ geeft onderin weer een melding dat het gelukt is, met je eigen commit message erbij:<br>
+<img src="file:///c:\MijnDocumenten\Kasten\2020\git\4.jpg" alt=""></p>
+<h2 id="vervolgcommits">Vervolgcommits</h2>
+<p>Doe nu een wijziging in je code, voeg bijvoorbeeld deze sensationele tekst toe:</p>
+<pre><code class="language-java"><div>System.out.println(<span class="hljs-string">&quot;Hello world!&quot;</span>);
+</div></code></pre>
+<p>Sla je wijziging op.</p>
+<p>Je ziet nu op het &quot;commit&quot; tabje je gewijzigde file verschijnen. Maak je tweede commit door die aan te vinken, weer een commit message in te vullen en druk daarna op &quot;Commit&quot;.</p>
+<p><img src="file:///c:\MijnDocumenten\Kasten\2020\git\5.jpg" alt=""></p>
+<p>Je changelist wordt nu weer leeg.</p>
+<h2 id="commit-history-bekijken">Commit history bekijken</h2>
+<p>Je kunt alle commits bekijken die je gedaan hebt, en verschillen tussen bestanden, via het &quot;log&quot; tabje van het &quot;git venster&quot;:</p>
+<ol>
+<li>Klik op &quot;git&quot; onderaan</li>
+<li>Klik eventueel op &quot;Log master&quot;. Je ziet een lijst van alle commits in het middelste venster.</li>
+<li>Klik op de commit die je wilt bekijken. Je krijgt de details van de commit aan de rechterkant te zien.</li>
+<li>Als wilt zien wat er in een bestand is gewijzigd, dubbelklik dan op dat bestand.</li>
+</ol>
+<p><img src="file:///c:\MijnDocumenten\Kasten\2020\git\git.gif" alt=""></p>
+
+    </body>
+    </html>

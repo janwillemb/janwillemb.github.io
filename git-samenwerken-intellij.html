@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Samenwerken via Git in IntelliJ</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="samenwerken-via-git-in-intellij">Samenwerken via Git in IntelliJ</h1>
+<p>Als je die nog niet open had staan: open je Java project met git repository <a href="git-basics-intellij.html">van de vorige instructie</a> in IntelliJ.</p>
+<h1 id="anderen-in-jouw-project-laten-werken">Anderen in jouw project laten werken</h1>
+<p>Je maakt eerst repository op gitlab om in samen te werken.</p>
+<ol>
+<li>Ga naar <a href="https://gitlab.com">https://gitlab.com</a> en meld je aan.</li>
+<li>Klik op &quot;New project&quot;</li>
+<li>Create blank project</li>
+<li>Geef het project een mooie naam</li>
+<li>Klik &quot;create project&quot;</li>
+</ol>
+<p>Je krijgt nu een pagina te zien van het lege project met wat commandline instructies. Je hebt nu de git URL van het project nodig. Klik hiervoor op de &quot;Clone&quot; knop en klik op het &quot;Copy URL&quot; knopje bij &quot;Clone with HTTPS&quot;:</p>
+<blockquote>
+<p><img src="2020/git/6.jpg" alt=""></p>
+</blockquote>
+<p>Ga terug naar je project in IntelliJ. Hier gaan we nu je lokale git commits pushen naar de remote repository op gitlab.</p>
+<ol>
+<li>Klik op het knopje &quot;push&quot;</li>
+<li>Je lokale git repository heeft nog geen verbinding met gitlab. Klik hiervoor op &quot;define remote&quot;.</li>
+<li>Laat &quot;origin&quot; staan, en vul bij &quot;URL&quot; de url in die je zojuist hebt gekopieerd van je gitlab repository.</li>
+</ol>
+<blockquote>
+<p><img src="2020/git/7.jpg" alt=""></p>
+</blockquote>
+<ol start="4">
+<li>Klik &quot;OK&quot;.</li>
+<li>Vul je gitlab credentials in.</li>
+<li>Je krijgt nu een overzicht van wat je naar gitlab gaat pushen. Druk op &quot;Push&quot; om het ook echt te doen.</li>
+</ol>
+<p>Als je nu naar je gitlab repository gaat, dan zie je daar je laatste code staan bij Repository &gt; File. Bij Repository &gt; Commits zie je al je commits.</p>
+<blockquote>
+<p><img src="2020/git/8.jpg" alt=""></p>
+</blockquote>
+<p>Je kunt nu bij &quot;Members&quot; andere mensen uitnodigen in jouw repository. Klik op &quot;Members&quot;, zoek de persoon die je wilt uitnodigen, en maak die persoon Developer. Druk op &quot;Invite&quot; om de invite te versturen.</p>
+<blockquote>
+<p><img src="2020/git/9.jpg" alt=""></p>
+</blockquote>
+<h1 id="in-een-project-van-iemand-anders-werken">In een project van iemand anders werken</h1>
+<p>Als je in het project van iemand anders wilt werken, dan heb je de gitlab URL nodig, zoals je die vindt onder de &quot;Clone&quot; knop bij &quot;Clone with HTTPS&quot;. Kopieer deze url (die eindigt met .git)</p>
+<p>Maak een nieuwe project in IntelliJ:</p>
+<ol>
+<li>Klik op File &gt; New &gt; Project from Version Control</li>
+<li>Vul de URL in die je net hebt gekopieerd</li>
+<li>Druk op &quot;Clone&quot;</li>
+</ol>
+<p>Je krijgt nu de repository naar je eigen PC gekopieerd met alle commits van de ander.</p>
+<p>Je kunt nu committen zoals je ook met een eigen project kunt.</p>
+<p>Druk op de knop &quot;Update project&quot; (pull) om de wijzigingen van anderen bij jou naar binnen te halen. Dit kun je het beste altijd doen voordat je pusht.</p>
+<blockquote>
+<p><img src="2020/git/11.jpg" alt=""></p>
+</blockquote>
+<p>Als er conflicten zijn met wijzigingen die je zelf hebt gedaan, dan krijg je per bestand de keuze of je</p>
+<ul>
+<li>je eigen wijzigingen voorrang wilt geven (Accept Yours)</li>
+<li>de wijziging van de ander voorrang wilt geven (Accept Theirs)</li>
+<li>handmatig wilt mergen (Merge)</li>
+</ul>
+<blockquote>
+<p><img src="2020/git/12.jpg" alt=""></p>
+</blockquote>
+<p>Als je conflicten hebt opgelost (gemerged), dan moet je daarna nog een keer deze merge committen, want het zijn uiteindelijk toch weer wijzigingen.</p>
+<p>Als er geen conflicten (meer) zijn, druk dan op de knop &quot;push&quot; om je eigen commits naar gitlab te publiceren.</p>
+
+    </body>
+    </html>

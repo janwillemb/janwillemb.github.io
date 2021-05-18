@@ -72,7 +72,7 @@
 
         .box {
             margin-top: 9px;
-            width: 1000px;
+            width: 700px;
         }
 
         pre {
@@ -82,6 +82,15 @@
 
         #wrapup {
             display: none;
+        }
+
+        #qrcanv {
+            position: relative;
+            left: 700px;
+        }
+        #explwrapper {
+            margin-top: -200px;
+            margin-right: 200px;
         }
     </style>
 
@@ -124,8 +133,10 @@
                 </tr>
             </table>
         </div>
+        <canvas id="qrcanv">
+        </canvas>
         <div id="explanation_row" class="box">
-            <div><strong>Explanation:</strong> <span id="explanation"></div>
+            <div id="explwrapper"><strong>Explanation:</strong> <span id="explanation"></div>
             <a id="url" href="#" target="explanation">Extra material about the subject <span id="subject"></span></a>
         </div>
         <div class="box">
@@ -141,7 +152,11 @@
         </ul>
     </div>
 
-
+    <!-- QR code generation from https://code.google.com/archive/p/jsqrencode/downloads -->
+    <script src="qr.js"></script>
+    <script>
+        setupqr('qrcanv', 200, 200);
+    </script>
 
     <script>
         var questions = [
@@ -389,6 +404,7 @@
 
         var submit = document.getElementById("submit");
         var next = document.getElementById("next");
+        var qrcanv = document.getElementById("qrcanv");
 
         showQuestion();
 
@@ -406,7 +422,9 @@
             }
 
             explanation.innerText = q.explanation;
-            url.setAttribute("href", q.url);
+            var href = location.href + q.url;
+            url.setAttribute("href", href);
+            doQR(href);
             subject.innerText = q.subject;
 
             var answers = q.answers;
@@ -429,6 +447,7 @@
             submit.setAttribute("disabled", "disabled");
             next.setAttribute("disabled", "disabled")
             explanation_row.style.display = "none";
+            qrcanv.style.display = "none";
 
             takeInput = true;
         }
@@ -481,6 +500,7 @@
             next.removeAttribute("disabled");
             submit.setAttribute("disabled", "disabled");
             explanation_row.style.display = "block";
+            qrcanv.style.display = "block";
             takeInput = false;
         }
 
@@ -533,6 +553,7 @@
             return result;
         }
     </script>
+
 
 </body>
 

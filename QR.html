@@ -1,0 +1,49 @@
+<html>
+	<head><title>Javascript / online QR code generator</title></head>
+	<body>
+    
+	<!-- QR code generation from https://code.google.com/archive/p/jsqrencode/downloads -->
+	
+	<!-- canvas to show QR code on -->
+	<canvas id="qrcanv">
+    </canvas>
+	
+	<!-- library -->
+    <script src="qr.js"></script>
+	
+	<!-- initialization -->
+    <script>
+        setupqr('qrcanv', 300, 300);
+    </script>
+	
+	<!-- function to harvest text from input and feed it to the qr-generation -->
+	<script>
+		function createQRfromText() {
+			var url = document.getElementById("textToQr").value;
+			var width = document.getElementById("width").value;
+			var height = document.getElementById("height").value;
+			setupqr('qrcanv', width, height);
+			doQR(url); // this is the library function to call
+		}
+	</script>
+	
+	<!-- inputs to configure the qr-code -->
+	<table>
+		<tr>
+			<td>Size</td>
+			<td>
+				<input type="text" value="300" id="width"> x
+				<input type="text" value="300" id="height"> 
+			</td>
+		</tr>
+		<tr>
+			<td>Url or text</td>
+			<td><input type="text" value="https://www.example.com" id="textToQr"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="submit" value="Create QR" onclick="createQRfromText()"></td>
+		</tr>
+	</table>
+
+</html>

@@ -706,6 +706,9 @@ function setupqr(canvasId, width, height) {
 }
 
 function doQR(input) {
+    // var group = 3;
+    // input = "groen";
+
     qf = genframe(input);
     qrc.lineWidth = 1;
 
@@ -717,10 +720,47 @@ function doQR(input) {
     px = Math.round(px - 0.5);
     qrc.clearRect(0, 0, wd, ht);
     qrc.fillStyle = '#fff';
+    // qrc.strokeStyle = 'Silver';
     qrc.fillRect(0, 0, px * (width + 8), px * (width + 8));
+    
     qrc.fillStyle = '#000';
-    for (i = 0; i < width; i++)
-        for (j = 0; j < width; j++)
-            if (qf[j * width + i])
-                qrc.fillRect(px * (4 + i), px * (4 + j), px, px)
+    // qrc.fillStyle = 'Silver';
+    // qrc.font = Math.round(px * .5) + "px Garamond";
+    // qrc.lineWidth = 1;
+ 
+
+    for (i = 0; i < width; i++) {
+        // qrc.beginPath();
+        // qrc.moveTo(px * (4 + i), px *4);
+        // qrc.lineTo(px * (4 + i), px * (4 + width));
+        // qrc.stroke();
+        for (j = 0; j < width; j++) {
+            if (qf[j * width + i]) {
+                qrc.fillRect(px * (4 + i), px * (4 + j), px, px);
+                //qrc.fillText("" + group, px * (4 + i) + Math.round(px * .2), px * (4 + j) + Math.round(px * .6));
+            } else {
+                // var randomNumber = Math.round(Math.random() * 2) + 1;
+                // while (randomNumber === group) {
+                //     randomNumber = Math.round(Math.random() * 2) + 1;
+                // }
+                // qrc.fillText("" + randomNumber, px * (4 + i) + Math.round(px * .2), px * (4 + j) + Math.round(px * .6));
+            }
+
+            // qrc.beginPath();
+            // qrc.moveTo(px * 4, px * (4 + j));
+            // qrc.lineTo(px * (4 + width), px * (4 + j));
+            // qrc.stroke();
+        }
+    }
+
+    // qrc.beginPath();
+    // qrc.moveTo(px * (4 + width), px *4);
+    // qrc.lineTo(px * (4 + width), px * (4 + width));
+    // qrc.stroke();
+
+    // qrc.beginPath();
+    // qrc.moveTo(px * 4, px * (4 + width));
+    // qrc.lineTo(px * (4 + width), px * (4 + width));
+    // qrc.stroke();
+
 }

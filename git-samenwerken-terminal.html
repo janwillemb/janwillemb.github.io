@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>git-basics-terminal.md</title>
+<title>git-samenwerken-terminal.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -365,62 +365,67 @@ code {
           : 'default'
     });
   </script>
-<h1 id="git-basics-via-de-terminal">Git Basics via de terminal</h1>
-<h1 id="vooraf">Vooraf</h1>
-<p>Zorg dat je git hebt geïnstalleerd. Op Windows: <a href="https://gitforwindows.org/">Git for Windows</a>, op Linux: <code>sudo apt install git</code>.</p>
-<h1 id="initialisatie">Initialisatie</h1>
-<p>Maak een nieuwe directory aan en cd er naar toe. Maak van deze directory nu een git repository met het commando <code>git init</code>.</p>
-<blockquote>
-<p><img src="git-init.jpg" alt=""></p>
-</blockquote>
-<p>Maak nu een bestand aan in deze directory, bijvoorbeeld door <code>echo Hello World &gt; hello.txt</code>, of op een andere manier die je leuk vindt.</p>
-<p>Voordat je je eerste commit gaat doen, moet je altijd je naam en email instellen. Het maakt niet uit wat je hier invult: dit is de naam en het emailadres waarmee voortaan je commit messages worden &quot;getekend&quot;. Dus zorg wel dat het op een of andere manier duidelijk is dat jij dat bent.</p>
-<p>Je doet dit met <code>git config user.name &quot;Jouw Naam&quot;</code> en <code>git config user.email email@example.com</code>.</p>
-<blockquote>
-<p><img src="git-config.jpg" alt=""></p>
-</blockquote>
-<h1 id="eerste-commit">Eerste commit</h1>
-<p>Nu kun je je eerste <em>commit</em> doen. Een commit kent twee stappen:</p>
-<ul>
-<li>Je moet alle wijzigingen eerst &quot;stagen&quot;. Daarmee zet je ze als het ware in het voorpoortaal voor een commit.</li>
-<li>Daarna kun je ze committen.</li>
-</ul>
-<p>Voor nu hoef je het onderscheid tussen stagen en committen niet te kennen en kun je het altijd zo doen:</p>
+<h1 id="samenwerken-met-git-via-de-terminal">Samenwerken met git via de terminal</h1>
+<p>Als je die nog niet open had staan: open je terminal naar de directory waar je git repository  <a href="git-basics-terminal.html">van de vorige instructie</a> staat.</p>
+<h1 id="anderen-in-jouw-repository-laten-werken">Anderen in jouw repository laten werken</h1>
+<p>Je moet eerst een repository op gitlab maken om mee samen te werken (gebruik hier geen bestaande repository voor).</p>
 <ol>
-<li>Stage alle wijzigingen met <code>git add -A</code></li>
-<li>Commit de wijzigingen met <code>git commit -m &quot;Een mooie commit message&quot;</code>. Ze bij de commit message iets waar je later geen spijt van krijgt.</li>
+<li>Ga naar https://gitlab.com en meld je aan</li>
+<li>Klik op &quot;New project&quot;</li>
+<li>Create blank project</li>
+<li>Geeft het project een mooie naam</li>
+<li>Vink &quot;Initialize the repository with a README&quot; uit.</li>
+<li>Klik &quot;Create project&quot;.</li>
+</ol>
+<p>Je krijgt nu een pagina te zien van het lege project met wat commandline instructies. Je hebt nu de git URL van het project nodig. Klik hiervoor op de &quot;Clone&quot; knop en klik op het &quot;Copy URL&quot; knopje bij &quot;Clone with HTTPS&quot;:</p>
+<blockquote>
+<p><img src="git-repo.jpg" alt=""></p>
+</blockquote>
+<p>Ga terug naar de terminal. Hier gaan we nu je lokale git commits pushen naar de remote repository op gitlab.</p>
+<p>Je lokale git repository heeft nog geen verbinding met gitlab. Die breng je aan met <code>git remote add origin &lt;url&gt;</code>, waarbij de url van de repository is die je net hebt gekopieerd.</p>
+<blockquote>
+<p><img src="git-remote.jpg" alt=""></p>
+</blockquote>
+<p>Nu kun je je complete git commit history naar gitlab &quot;pushen&quot;. Dat doe je met <code>git push</code>. Omdat het de eerste keer is moet je aangeven dat het om de masterbranch gaat: <code>git push --set-upstream origin master</code>.</p>
+<blockquote>
+<p><img src="git-push-initial.jpg" alt=""></p>
+</blockquote>
+<p>Vanaf nu hoef je alleen nog <code>git push</code> te gebruiken om je commits te pushen. Probeer het eens uit:</p>
+<ol>
+<li>Doe een wijziging in een van de bestanden</li>
+<li><code>git add -A</code></li>
+<li><code>git commit -m &quot;Een wijziging&quot;</code></li>
+<li><code>git push</code></li>
+</ol>
+<p>Check op de website van gitlab bij Repository &gt; Files en &gt; Commits of het gelukt is:</p>
+<blockquote>
+<p><img src="git-remote-files.jpg" alt=""></p>
+</blockquote>
+<p>Je kunt nu bij &quot;Members&quot; andere mensen uitnodigen in jouw repository. Klik op &quot;Members&quot;, zoek de persoon die je wilt uitnodigen, en maak die persoon Developer. Druk op &quot;Invite&quot; om de invite te versturen.</p>
+<blockquote>
+<p><img src="git-members.jpg" alt=""></p>
+</blockquote>
+<h1 id="in-een-project-van-iemand-anders-werken">In een project van iemand anders werken</h1>
+<p>Als je in het project van iemand anders wilt werken, of als je een bestaand project van jezelf lokaal wilt zetten, dan heb je de gitlab URL nodig, zoals je die vindt onder de &quot;Clone&quot; knop bij &quot;Clone with HTTPS&quot;. Kopieer deze url (die eindigt met .git).</p>
+<p>Ga met de terminal naar de plek waar je de repository wilt gaan gebruiken, maar maak de directory zelf nog niet aan (dat doet git voor je).</p>
+<ol>
+<li>Clone de repository met <code>git clone &lt;url&gt;</code>, waarbij url de link is die je net hebt gekopieerd</li>
+<li>Je krijgt nu een nieuwe directory met de naam van de repository, met daarin de complete repository met alle bestanden en commits</li>
+<li>cd de directory in en doe <code>git log -4</code> om te kijken of het gelukt is</li>
 </ol>
 <blockquote>
-<p><img src="git-commit.jpg" alt=""></p>
+<p><img src="git-clone.jpg" alt=""></p>
 </blockquote>
-<h1 id="vervolgcommits">Vervolgcommits</h1>
-<p>Doe nu een wijziging in het bestand, of maak een nieuw bestand aan.</p>
-<p>Als je nu <code>git status</code> aanroept, dan zie je dat er wijzigingen zijn:</p>
-<blockquote>
-<p><img src="git-status.jpg" alt=""></p>
-</blockquote>
-<p>Commit deze op dezelfde manier als de eerste commit:</p>
+<p>Je kunt nu committen zoals je ook met een eigen project kunt.</p>
+<p>Doe voordat je pusht altijd een <code>git pull</code> om de wijzigingen van anderen eerst binnen te krijgen en eventuele conflicten op te lossen!</p>
+<p>Conflicten los je het beste met een GUI tool op. Dan krijg je per bestand de keuze of je</p>
 <ul>
-<li><code>git add -A</code></li>
-<li><code>git commit -m &quot;Nieuw bestand, moest van de juf&quot;</code></li>
+<li>je eigen wijzigingen voorrang wilt geven (yours/local)</li>
+<li>de wijziging van de ander voorrang wilt geven (theirs/remote)</li>
+<li>handmatig wilt mergen (merge)</li>
 </ul>
-<p>ALs je nu opnieuw naar <code>git status</code> kijkt, dan zie je dat er geen wijzigingen meer zijn.</p>
-<blockquote>
-<p><img src="git-status-leeg.jpg" alt=""></p>
-</blockquote>
-<h1 id="commit-history-bekijken">Commit history bekijken</h1>
-<p>Het bekijken van de git history is in de terminal niet echt fijn. Het beste kun je daarvoor een GUI tool voor gebruiken. <a href="https://code.visualstudio.com/">Visual Studio Code</a> kan dat, of <a href="https://www.atlassian.com/software/sourcetree">Atlassian SourceTree</a>, en <a href="https://sourceforge.net/software/git-gui-clients/">eindeloos veel andere applicaties</a>.</p>
-<p>Maar het <em>kan</em> wel in de terminal, met <code>git log -4</code>, waarbij &quot;4&quot; het aantal commits is dat je terug wilt kijken:</p>
-<blockquote>
-<p><img src="git-log.jpg" alt=""></p>
-</blockquote>
-<p>Met <code>git log -p -1</code> kun je de inhoudelijke verschillen bekijken van de laatste commit. Dit is niet geschikt voor mensen met terminalfobie.</p>
-<blockquote>
-<p><img src="git-log-p.jpg" alt=""></p>
-</blockquote>
-<p>Het is lastig te lezen (daarom is een GUI ook fijner). Maar soms kan het handig te zijn om snel een wijziging te bekijken. Als je goed kijkt, zie je onderaan in het groen de inhoud van het toegevoegde bestand. Regels die verwijderd zijn, worden in het rood afgebeeld (niet van toepassing in de screenshot).</p>
-<h1 id="samenwerken">Samenwerken</h1>
-<p>Dit heeft nog niets met samenwerken te maken: het speelt zich tot nu toe allemaal op je eigen harde schijf af. In het vervolg zie je hoe je dit kunt gebruiken om mee samen te werken.</p>
+<p>Als je conflicten hebt opgelost (gemerged), dan moet je daarna de merge daarna nog een keer committen, want het doen van een merge levert uiteindelijk toch weer wijzigingen op. Sommige tools doen dit al automatisch voor je.</p>
+<p>Als er geen conflicten (meer) zijn, doe dan een <code>git push</code> om je eigen commits naar gitlab te publiceren.</p>
 
 </body>
 </html>

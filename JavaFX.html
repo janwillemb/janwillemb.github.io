@@ -366,18 +366,22 @@ code {
           : 'default'
     });
   </script>
+<!-- 
+manual changes: add title in title tag  
+change css for img, add: 	border: 1px solid Silver;
+-->
 <h1 id="tutorial-first-steps-in-creating-a-javafx-project-with-intellij">Tutorial: first steps in creating a JavaFX project with IntelliJ</h1>
 <h2 id="initializing-the-project">Initializing the project</h2>
 <p>In IntelliJ, create a new project. On the New Project wizard, choose &quot;Maven Archetype&quot;. On the Maven Archetype settings page, enter these values:</p>
 <ul>
 <li>Name: a name for your project</li>
 <li>Location: the directory where it should be stored</li>
-<li>JDK: most recent version</li>
+<li>JDK: leave at the most recent version</li>
 <li>Catalog: Maven Central</li>
-<li>Archetype: org.openjfx:javafx-archetype-fxml</li>
+<li>Archetype: <code>org.openjfx:javafx-archetype-fxml</code></li>
 <li>Version: leave as is</li>
 <li>Select &quot;Advanced settings&quot;</li>
-<li>GroupId: nl.saxion.re, or your own package</li>
+<li>GroupId: <code>nl.saxion.re</code>, or your own package</li>
 </ul>
 <p><img src="javafx/1-newproject.jpg" alt=""></p>
 <p>Press &quot;Create&quot;. After some time, the project will be ready. You can test the application by starting it from the <code>App</code> class.</p>
@@ -455,7 +459,7 @@ panePicture.getChildren().add(<span class="hljs-keyword">new</span> ImageView(ur
 <p><img src="javafx/14-cat.jpg" alt=""></p>
 <h1 id="do-it-yourself">Do it yourself</h1>
 <h2 id="assignment-1-the-%22next%22-button">Assignment 1: the &quot;Next&quot; button</h2>
-<p>You can now go ahead and implement the &quot;Next&quot; button yourself, using the URL to the 1965 dog. Or use your own images.<br>
+<p>You can now go ahead and implement the &quot;Next&quot; button yourself, using the URL to the 1965 dog.
 <a href="https://service.archief.nl/gaf/api/file/v1/img/80c487af-3093-4b9d-a25f-676f46e322d8?h=300">https://service.archief.nl/gaf/api/file/v1/img/80c487af-3093-4b9d-a25f-676f46e322d8?h=300</a></p>
 <p><img src="https://service.archief.nl/gaf/api/file/v1/img/80c487af-3093-4b9d-a25f-676f46e322d8?h=300" alt=""></p>
 <h2 id="assignment-2-getting-and-setting-text-in-controls">Assignment 2: getting and setting text in controls</h2>
@@ -474,9 +478,9 @@ Everything after the question mark is the search query. In this example it will 
 <p>When you completed this tutorial, you know some of the very basics of JavaFX. But it's a large framework, capable of doing many nice things. There are lots of tutorials and references online, for example <a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBzfXLWLSYVy8EbTdpGbUIG">this playlist on YouTube</a>.</p>
 <p>This tutorial is <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA licensed</a>. This means that when sharing it: BY – credit must be given to the creator, NC – only noncommercial uses of the work are permitted and, SA – adaptations must be shared under the same terms.</p>
 <img src="javafx/0-saxion.jpg" width="200" style="float: right">
-<p>Organization: <a href="https://www.saxion.edu">Saxion University of Applied Sciences</a>.<br>
-Author: <a href="mailto:j.w.boer@saxion.nl">Jan Willem Boer</a>.<br>
-Credit: Dog and cat from <a href="https://www.nationaalarchief.nl/onderzoeken/zoeken?activeTab=photos&amp;rm=gallery">Dutch National Archives</a>. Random image search by <a href="https://unsplash.com/">unsplash</a><br>
+<p>Author: <a href="mailto:j.w.boer@saxion.nl">Jan Willem Boer</a> @ <a href="https://www.saxion.edu">Saxion University of Applied Sciences</a>.<br>
+Dog and cat from <a href="https://www.nationaalarchief.nl/onderzoeken/zoeken?activeTab=photos&amp;rm=gallery">Dutch National Archives</a>.<br>
+Random image search by <a href="https://unsplash.com/">unsplash</a><br>
 Date: 2022-06-10.</p>
 
 </body>

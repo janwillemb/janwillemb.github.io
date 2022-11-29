@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Tutorial: first steps in creating a JavaFX project with IntelliJ</title>
+<title>JavaFX.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -102,7 +102,6 @@ body.showEditorSelection li.code-line:hover:before {
 img {
 	max-width: 100%;
 	max-height: 100%;
-	border: 1px solid Silver;
 }
 
 a {
@@ -372,24 +371,26 @@ change css for img, add: 	border: 1px solid Silver;
 -->
 <h1 id="tutorial-first-steps-in-creating-a-javafx-project-with-intellij">Tutorial: first steps in creating a JavaFX project with IntelliJ</h1>
 <h2 id="initializing-the-project">Initializing the project</h2>
-<p>In IntelliJ, create a new project. On the New Project wizard, choose &quot;Maven Archetype&quot;. On the Maven Archetype settings page, enter these values:</p>
+<p>In IntelliJ, create a new project. On the New Project wizard, choose &quot;JavaFX&quot;. On the page on the right, enter these values:</p>
 <ul>
 <li>Name: a name for your project</li>
 <li>Location: the directory where it should be stored</li>
+<li>Language: leave at Java</li>
+<li>Build system: leave at Maven</li>
+<li>Group: <code>nl.saxion.re</code>, or your own package</li>
+<li>Artifact: will be the name of your project</li>
 <li>JDK: leave at the most recent version</li>
-<li>Catalog: Maven Central</li>
-<li>Archetype: <code>org.openjfx:javafx-archetype-fxml</code></li>
-<li>Version: leave as is</li>
-<li>Select &quot;Advanced settings&quot;</li>
-<li>GroupId: <code>nl.saxion.re</code>, or your own package</li>
 </ul>
 <p><img src="javafx/1-newproject.jpg" alt=""></p>
-<p>Press &quot;Create&quot;. After some time, the project will be ready. You can test the application by starting it from the <code>App</code> class.</p>
+<p>Press &quot;Next&quot;. Select the ControlsFX additional library.</p>
+<p><img src="javafx/1b-controls.jpg" alt=""></p>
+<p>Press &quot;Create&quot;.</p>
+<p>After some time, the project will be ready. You can test the application by starting it from the <code>HelloApplication</code> class.</p>
 <h2 id="designing-ui-components">Designing UI components</h2>
-<p>The project will have two UI components: &quot;primary&quot; and &quot;secondary&quot;:</p>
+<p>The project starts with one view, the &quot;hello&quot; view. It has two parts, one in the java directory and the other in the resources directory:</p>
 <p><img src="javafx/2-projstructure.jpg" alt=""></p>
-<p>The <code>fxml</code>-files in the <code>resources</code> directory contain the specification of what the UI should look like. The <code>Controller</code> classes are the code that define the behavior of the components, <code>PrimaryController</code> for the <code>primary.fxml</code> component, <code>SecondaryController</code> for the <code>secondary.fxml</code> component.</p>
-<p>Let's add a third component. Right-click the package name in the <code>resources</code> directory and select New &gt; FXML File.</p>
+<p>The <code>fxml</code>-file in the <code>resources</code> directory contains the specification of what the UI should look like. The <code>Controller</code> class contains the code that defines the behavior of the component.</p>
+<p>Let's add a second component. Right-click the package name in the <code>resources</code> directory and select New &gt; FXML File.</p>
 <p><img src="javafx/3-new-fxml.jpg" alt=""></p>
 <p>Give it the name &quot;my-own-component&quot;:</p>
 <p><img src="javafx/4-new-fxml-name.jpg" alt=""></p>
@@ -400,8 +401,9 @@ change css for img, add: 	border: 1px solid Silver;
 <p><img src="javafx/6-new-controller-name.jpg" alt=""></p>
 <p>We don't need the Controller for now, so head back to our <code>fxml</code> file: double-click the file <code>my-own-component.fxml</code>. When you open an <code>fxml</code> file, it opens either as XML or in the UI designer. If it opens as XML, press the &quot;Scene Builder&quot; tab at the bottom to go to the UI designer.</p>
 <p><img src="javafx/7-fxml-switch-scene-builder.jpg" alt=""></p>
-<p>Clicking the tab will open the Scene Builder.<br>
-(<em>NOTE: You may have to install two additional libraries when you try to use the scene builder for the first time.</em>)</p>
+<p>Clicking the tab will open the Scene Builder.</p>
+<p><em>NOTE: You may have to install two additional libraries when you try to use the scene builder for the first time. Click the message on top of the window (twice, for two libraries), and have some patience.</em></p>
+<p><img src="javafx/7b-fxml-scene-builder-error.jpg" alt=""></p>
 <p>Now we will add two buttons and a canvas to our component (also see the video below):</p>
 <ul>
 <li>drag a GridPane onto the component.</li>
@@ -413,12 +415,35 @@ change css for img, add: 	border: 1px solid Silver;
 <li>on the right, on &quot;Layout&quot; make the Pane span two columns (set <code>Column Span</code> to <code>2</code>).</li>
 </ul>
 <video controls width="1000">
-    <source src="javafx/8-add-controls.webm" type="video/webm">
     <source src="javafx/8-add-controls.mp4" type="video/mp4">
 </video>
 <h2 id="show-our-screen">Show our screen</h2>
 <p>Now we want our new screen to be shown at some point to test it. Let's hijack the sample application to show our own screen.</p>
-<p>Open the <code>SecondaryController</code> class and change the text <strong>&quot;primary&quot;</strong> to <strong>&quot;my-own-component&quot;</strong> (or whatever you called the <code>fxml</code> file). Now instead of returning to the primary component, the application will load our new component when the user clicks the button on the secondary component.</p>
+<p>Open the <code>HelloController</code> class and add the following code to the onHelloButtonClick method:</p>
+<pre class="hljs"><code><div>String componentToOpen = <span class="hljs-string">"my-own-component"</span>;
+String windowTitle = <span class="hljs-string">"My own component"</span>;
+<span class="hljs-keyword">boolean</span> openInNewWindow = <span class="hljs-keyword">true</span>;
+<span class="hljs-keyword">int</span> width = <span class="hljs-number">800</span>;
+<span class="hljs-keyword">int</span> height = <span class="hljs-number">600</span>;
+
+Stage stage;
+<span class="hljs-keyword">if</span> (openInNewWindow) {
+    stage = <span class="hljs-keyword">new</span> Stage();
+} <span class="hljs-keyword">else</span> {
+    stage = (Stage) welcomeText.getScene().getWindow();
+}
+FXMLLoader fxmlLoader = <span class="hljs-keyword">new</span> FXMLLoader(HelloApplication<span class="hljs-class">.<span class="hljs-keyword">class</span>.<span class="hljs-title">getResource</span>(<span class="hljs-title">componentToOpen</span> + ".<span class="hljs-title">fxml</span>"))</span>;
+Scene scene = <span class="hljs-keyword">new</span> Scene(fxmlLoader.load(), width, height);
+stage.setTitle(windowTitle);
+stage.setScene(scene);
+stage.show();
+</div></code></pre>
+<p><em>Note: The <code>FXMLLoader</code>, <code>Scene</code> and <code>Stage</code> classes can't be found by default. Let IntelliJ fix this, or add the following imports to the existing imports on top of the file:</em></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> javafx.fxml.FXMLLoader;
+<span class="hljs-keyword">import</span> javafx.scene.Scene;
+<span class="hljs-keyword">import</span> javafx.stage.Stage;
+</div></code></pre>
+<p>Now instead of changing some lame text on a label, the application will load our new component when the user clicks the button.</p>
 <p><img src="javafx/9-hack.jpg" alt=""></p>
 <p>Start the application to test your sensational new screen:</p>
 <video controls width="800">
@@ -428,7 +453,7 @@ change css for img, add: 	border: 1px solid Silver;
 <h2 id="add-functionality">Add functionality</h2>
 <p>We want our new screen to actually do something whenever the buttons are pressed. If the left button is pressed, we want to show a picture of a cat from 1947 and if the right button is pressed a dog from 1965. Because why not.</p>
 <p>The functionality of a screen is programmed into the Controller class, in our case the <code>MyOwnComponent</code> class.</p>
-<p>First, we need to make sure we can add an image to the <code>Pane</code> we added in the first row. For this, the <code>Pane</code> should have a name, so we can reference it from code. Open the <code>fxml</code> file in the Scene Builder, click on the <code>Pane</code> in the tree on the left, or on the <code>Pane</code> itself. On the right, in &quot;Code&quot; on the <code>fx:id</code> property, give the panel the id <code>panePicture</code>.</p>
+<p>First, we need to make sure we can add an image to the <code>Pane</code> we added in the first row. For this, the <code>Pane</code> should have a name, so we can reference it from code. Open the <code>my-own-component.fxml</code> file in the Scene Builder, click on the <code>Pane</code> in the tree on the left, or on the <code>Pane</code> itself. On the right, in &quot;Code&quot; on the <code>fx:id</code> property, give the panel the id <code>panePicture</code>.</p>
 <p><img src="javafx/11-pnl-id.jpg" alt=""></p>
 <p>Open the <code>MyOwnComponent</code> class and add a new field of type <code>Pane</code> with the id you just added to the pane.<br>
 The <code>Pane</code> class should be imported from the <code>javafx.scene.layout</code> package. The field should be &quot;annotated&quot; with the <code>@FXML</code> annotation from the <code>javafx.fxml</code> package:</p>
@@ -455,7 +480,7 @@ panePicture.getChildren().add(<span class="hljs-keyword">new</span> ImageView(ur
 <p><img src="javafx/12-own-component.jpg" alt=""></p>
 <p>Now we should connect the Previous button to the method we just created. Open the Scene Builder again, select the button and in &quot;Code&quot;, find the &quot;On Action&quot; property. In its dropdown you can select the method we created:</p>
 <p><img src="javafx/13-prev-button.jpg" alt=""></p>
-<p>Run the application. When you now click the &quot;Previous&quot; button, the picture of the ancient cat appears:</p>
+<p>Run the application. When you now click the &quot;Previous&quot; button, after a few seconds (the archief.nl website is not that fast) the picture of the ancient cat appears:</p>
 <p><img src="javafx/14-cat.jpg" alt=""></p>
 <h1 id="do-it-yourself">Do it yourself</h1>
 <h2 id="assignment-1-the-%22next%22-button">Assignment 1: the &quot;Next&quot; button</h2>
@@ -481,7 +506,7 @@ Everything after the question mark is the search query. In this example it will 
 <p>Author: <a href="mailto:j.w.boer@saxion.nl">Jan Willem Boer</a> @ <a href="https://www.saxion.edu">Saxion University of Applied Sciences</a>.<br>
 Dog and cat from <a href="https://www.nationaalarchief.nl/onderzoeken/zoeken?activeTab=photos&amp;rm=gallery">Dutch National Archives</a>.<br>
 Random image search by <a href="https://unsplash.com/">unsplash</a><br>
-Date: 2022-06-10.</p>
+Last updated: 2022-11-29.</p>
 
 </body>
 </html>

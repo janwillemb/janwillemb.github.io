@@ -1,0 +1,17 @@
+body, p {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.2rem;
+}
+body {
+    margin: auto;
+    padding: 1em;
+    max-width: 40rem;
+}
+a img {
+    border: 1px solid silver;
+}
+
+.instructie p {
+    font-size: 1rem;
+    font-style: italic;
+}
